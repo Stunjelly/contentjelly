@@ -4,10 +4,22 @@
 // define ABSPATH as directory in which index is first loaded
 
 
-print ABSPATH . 'core/contjell-config.php';
 if ( file_exists( ABSPATH . 'core/contjell-config.php') ) {
 	//config file exists, load that shit
 	require_once( ABSPATH . 'core/contjell-config.php' );
+	
+	require_once( ABSPATH . 'core/contjell-db.php' );	
+	require_once(ABSPATH . 'core/contjell-modules.php');
+	require_once(ABSPATH . 'core/contjell-pathfinder.php');
+	require_once(ABSPATH . 'core/contjell-auth.php');
+	
+	
+	$db = new ezSQL_mysql(DB_USER,DB_PASSWORD,DB_NAME,DB_HOST);
+	$cj_modules = new cj_modules();
+	$cj_modules->get_mods();
+	$cj_pathfinder = new cj_pathfinder();
+	print_r($cj_pathfinder->get_path());
+	
 } else {
 
 	// If is doesn't exist dump error
