@@ -6,6 +6,7 @@ class cj_pathfinder {
 	public $secondary;
 	public $hooks;
 	private $path_with_hooks; 
+	global $cj_modules;
 	
 	 public function __construct() {
 	 	global $db, $table_prefix, $init_location;
@@ -14,7 +15,7 @@ class cj_pathfinder {
 		$this->secondary = null;
 		$this->hooks = array();
 		$this->path_with_hooks = "/";
-      $this->init_location =  explode("/", $init_location);
+                $this->init_location =  explode("/", $init_location);
     }
     
    public function get_path () {
@@ -31,12 +32,17 @@ class cj_pathfinder {
 		print_r($this->init_location);
 		if ($this->init_location[0] != "") {
 			foreach ($this->init_location as $path_chunk) {
-				if (!$this->check_if_hook($path_chunk, $path_prefix)) {
+				$check_hook = $this->check_if_hook($path_chunk, $path_prefix);
+				if (!$check_hook) {
 					if($path_prefix != "/") $path_prefix .= "/";
 					$path_prefix .= "{%hook%}";
+                                        $this->hooks[] = $path_chunk;
 				}else{
 					if($path_prefix != "/") $path_prefix .= "/";
 					$path_prefix .= $path_chunk;
+					if(ISSET($cj_modules->m_list[$check_hook])){
+						print $cj_modules[$check_hook]['name'];
+					}
 				}
 			}
 		}
@@ -50,7 +56,7 @@ class cj_pathfinder {
 		if ($look_for_hook == "") {
 			return (FALSE);
 		} else {
-			return (TRUE);
+			return ($look_for_hoook->id);
 		}
 	}	
 	
