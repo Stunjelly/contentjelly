@@ -24,4 +24,7 @@ $table_prefix  = 'cj_';
 //languages might come later
 define ('WPLANG', '');
 
+//DEBUGGER on/off (true/false) (advise false for live site)
+define ('CJ_DEBUG_MODE_ON', TRUE);
+
 ?>

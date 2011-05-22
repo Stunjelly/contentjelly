@@ -14,7 +14,7 @@ class cj_modules {
 		global $db, $table_prefix;
 		
 		//select primary and teriary modules
-		$mlist =  $db->get_results("SELECT * FROM ".$table_prefix."modules WHERE module_type=1 or module_type=3");
+		$mlist =  $db->get_results("SELECT * FROM ".$table_prefix."modules");
 		
 		foreach($mlist as $mod){			
 			//create/reset empty child array
@@ -31,8 +31,13 @@ class cj_modules {
 					}
 				}
 			}
+			
 			//update m_list
-			$this->m_list[$mod->module_id] = array("type" => $mod->module_type, "name" => $mod->module_name, "location" => $mod->module_loc, "children" => $children);
+			if ($mod->module_type == 2){
+				$this->m_list[$mod->module_id] = array("type" => $mod->module_type, "name" => $mod->module_name, "location" => $mod->module_loc, "parent" => $mod->module_parent);	
+			} else {
+				$this->m_list[$mod->module_id] = array("type" => $mod->module_type, "name" => $mod->module_name, "location" => $mod->module_loc, "children" => $children);
+			}
 		}
 	}
 	

@@ -33,7 +33,7 @@ CREATE TABLE  `contjell`.`cj_modules` (
   `module_loc` text NOT NULL,
   `module_parent` varchar(10) NOT NULL,
   PRIMARY KEY (`module_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contjell`.`cj_modules`
@@ -41,7 +41,9 @@ CREATE TABLE  `contjell`.`cj_modules` (
 
 /*!40000 ALTER TABLE `cj_modules` DISABLE KEYS */;
 LOCK TABLES `cj_modules` WRITE;
-INSERT INTO `contjell`.`cj_modules` VALUES  (1,'test_module',1,'primary/test_module','');
+INSERT INTO `contjell`.`cj_modules` VALUES  (1,'test_module',1,'primary/test_module',''),
+ (5,'profile',2,'','4'),
+ (4,'users',1,'','');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cj_modules` ENABLE KEYS */;
 
@@ -56,6 +58,7 @@ CREATE TABLE  `contjell`.`cj_pathfinder` (
   `path_chunk` varchar(225) NOT NULL,
   `path_prefix` varchar(225) NOT NULL,
   `path_module` int(11) NOT NULL,
+  `path_parent` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
@@ -65,12 +68,12 @@ CREATE TABLE  `contjell`.`cj_pathfinder` (
 
 /*!40000 ALTER TABLE `cj_pathfinder` DISABLE KEYS */;
 LOCK TABLES `cj_pathfinder` WRITE;
-INSERT INTO `contjell`.`cj_pathfinder` VALUES  (6,'profile','/user/{%hook%}',4),
- (5,'{%hook%}','/user',4),
- (4,'user','/',4),
- (3,'forum','/',3),
- (2,'blog','/',2),
- (1,'news','/',1);
+INSERT INTO `contjell`.`cj_pathfinder` VALUES  (6,'profile','/user/{%hook%}',5,4),
+ (5,'{%hook%}','/user',4,0),
+ (4,'user','/',4,0),
+ (3,'forum','/',3,0),
+ (2,'blog','/',2,0),
+ (1,'news','/',1,0);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cj_pathfinder` ENABLE KEYS */;
 

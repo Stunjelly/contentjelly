@@ -4,21 +4,31 @@
 // define ABSPATH as directory in which index is first loaded
 
 
-if ( file_exists( ABSPATH . 'core/contjell-config.php') ) {
+if ( file_exists(ABSPATH . 'core/contjell-config.php') ) {
 	//config file exists, load that shit
-	require_once( ABSPATH . 'core/contjell-config.php' );
+	require_once(ABSPATH . 'core/contjell-config.php' );
 	
-	require_once( ABSPATH . 'core/contjell-db.php' );	
+	//load core classes
+	require_once(ABSPATH . 'core/contjell-errors.php');
+	require_once(ABSPATH . 'core/contjell-db.php' );	
 	require_once(ABSPATH . 'core/contjell-modules.php');
 	require_once(ABSPATH . 'core/contjell-pathfinder.php');
 	require_once(ABSPATH . 'core/contjell-auth.php');
 	
-	
+	//start core classes
+	$cj_error = new cj_error();
 	$db = new ezSQL_mysql(DB_USER,DB_PASSWORD,DB_NAME,DB_HOST);
 	$cj_modules = new cj_modules();
 	$cj_modules->get_mods();
 	$cj_pathfinder = new cj_pathfinder();
+	
+	//testing stuff
 	print_r($cj_pathfinder->get_path());
+	
+	//if suffix /debug on path then fireup the debug window.
+	if ($cj_pathfinder->debug_mode() and CJ_DEBUG_MODE_ON == TRUE){
+		$cj_error->debugger();
+	}
 	
 } else {
 
