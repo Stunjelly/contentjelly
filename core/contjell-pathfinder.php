@@ -12,7 +12,9 @@ class cj_pathfinder {
 	 	global $db, $table_prefix, $init_location;
 	 	//find default module for "/" page
 		$get_primary_default = $db->get_results("SELECT setting_value FROM ".$table_prefix."settings WHERE setting_name='core_default_primary' LIMIT 0,1");
-		$this->primary = $get_primary_default;
+		
+		$this->primary = $get_primary_default[0];
+		$this->primary = $this->primary->setting_value;
 		
 		$this->secondary = null;
 		$this->hooks = array();

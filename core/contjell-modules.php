@@ -42,9 +42,19 @@ class cj_modules {
 	}
 	
 	/* function to load module class*/
-	public function load_mod($id) {
+	public function load_mods() {
+		global $cj_pathfinder;
 			//currently only debugging
-			print_r($this->m_list[$id]);
+			//print $cj_pathfinder->primary;
+			include_once(ABSPATH . $this->m_list[$cj_pathfinder->primary]['location']."/init.php");
+			if ($cj_pathfinder->secondary != null) {
+				include_once(ABSPATH . $this->m_list[$cj_pathfinder->secondary]['location']."/init.php");
+			}
+			foreach ($this->m_list as $key=>$mod_is_teri){
+				if ($mod_is_teri['type'] == 3) {
+					include_once(ABSPATH . $this->m_list[$key]['location']."/init.php");
+				}
+			}
 	}
 }
 
