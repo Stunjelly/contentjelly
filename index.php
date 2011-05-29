@@ -7,10 +7,12 @@ $init_location = $_GET['i_l'];
 
 // set ABSPATH to this parent level directory
 define( 'ABSPATH', dirname(__FILE__) . '/' );
+define('RELPATH', array_shift(explode('index.php',$_SERVER['SCRIPT_NAME'])));
+
 
 //Load the Loader
 
-require_once(dirname(__FILE__) . '/core/contjell-loader.php');
+require_once(ABSPATH . '/core/contjell-loader.php');
 
 
 

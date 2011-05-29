@@ -43,7 +43,7 @@ class cj_modules {
 	
 	/* function to load module class*/
 	public function load_mods() {
-		global $cj_pathfinder;
+		global $cj_pathfinder, $db, $cj_modules, $table_prefix, $cj_theme;
 			//currently only debugging
 			//print $cj_pathfinder->primary;
 			include_once(ABSPATH . $this->m_list[$cj_pathfinder->primary]['location']."/init.php");

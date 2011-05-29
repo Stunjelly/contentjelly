@@ -14,12 +14,21 @@ if ( file_exists(ABSPATH . 'core/contjell-config.php') ) {
 	require_once(ABSPATH . 'core/contjell-modules.php');
 	require_once(ABSPATH . 'core/contjell-pathfinder.php');
 	require_once(ABSPATH . 'core/contjell-auth.php');
+	require_once(ABSPATH . 'core/contjell-theme.php');
 	
 	//start core classes
 	$cj_error = new cj_error();
 	$db = new ezSQL_mysql(DB_USER,DB_PASSWORD,DB_NAME,DB_HOST);
 	$cj_modules = new cj_modules();
 	$cj_pathfinder = new cj_pathfinder();
+	$cj_theme = new cj_theme();
+	
+//make global tests
+	global $cj_error;
+	global $cj_pathfinder;
+	global $cj_modules;
+	global $cj_theme;
+	global $db;	
 	
 	//testing stuff
 	$cj_modules->get_mods();
