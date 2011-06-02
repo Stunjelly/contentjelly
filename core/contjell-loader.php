@@ -21,6 +21,7 @@ if ( file_exists(ABSPATH . 'core/contjell-config.php') ) {
 	$db = new ezSQL_mysql(DB_USER,DB_PASSWORD,DB_NAME,DB_HOST);
 	$cj_modules = new cj_modules();
 	$cj_pathfinder = new cj_pathfinder();
+	$cj_auth = new cj_auth();
 	$cj_theme = new cj_theme();
 	
 //make global tests
@@ -33,6 +34,7 @@ if ( file_exists(ABSPATH . 'core/contjell-config.php') ) {
 	//testing stuff
 	$cj_modules->get_mods();
 	$cj_pathfinder->get_path();
+	$cj_auth->init();
 	$cj_modules->load_mods();
 	
 	//if suffix /debug on path then fireup the debug window.

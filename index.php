@@ -7,7 +7,10 @@ $init_location = $_GET['i_l'];
 
 // set ABSPATH to this parent level directory
 define( 'ABSPATH', dirname(__FILE__) . '/' );
-define('RELPATH', array_shift(explode('index.php',$_SERVER['SCRIPT_NAME'])));
+
+//there must be a better way of doing this!
+$rel_path = explode('index.php',$_SERVER['SCRIPT_NAME']);
+define('RELPATH', array_shift($rel_path));
 
 
 //Load the Loader

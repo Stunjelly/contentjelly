@@ -1,5 +1,4 @@
 <?php
-
-print "Test module #2 loaded!";
+include(ABSPATH."primary/user/functions.php");
 
 ?>

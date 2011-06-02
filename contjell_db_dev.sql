@@ -33,7 +33,7 @@ CREATE TABLE  `contjell`.`cj_modules` (
   `module_loc` text NOT NULL,
   `module_parent` varchar(10) NOT NULL,
   PRIMARY KEY (`module_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contjell`.`cj_modules`
@@ -42,11 +42,8 @@ CREATE TABLE  `contjell`.`cj_modules` (
 /*!40000 ALTER TABLE `cj_modules` DISABLE KEYS */;
 LOCK TABLES `cj_modules` WRITE;
 INSERT INTO `contjell`.`cj_modules` VALUES  (1,'test_module',1,'primary/test_module',''),
- (5,'profile',2,'primary/user/secondary/profile','4'),
- (4,'users',1,'primary/user',''),
- (7,'team_search',1,'primary/team',''),
- (8,'login',2,'primary/user/secondary/login','4'),
- (9,'register',2,'primary/user/secondary/register','4');
+ (5,'profile',2,'','4'),
+ (4,'users',1,'','');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cj_modules` ENABLE KEYS */;
 
@@ -63,7 +60,7 @@ CREATE TABLE  `contjell`.`cj_pathfinder` (
   `path_module` int(11) NOT NULL,
   `path_parent` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contjell`.`cj_pathfinder`
@@ -76,11 +73,7 @@ INSERT INTO `contjell`.`cj_pathfinder` VALUES  (6,'profile','/user/{%hook%}',5,4
  (4,'user','/',4,0),
  (3,'forum','/',3,0),
  (2,'blog','/',2,0),
- (1,'news','/',1,0),
- (7,'post','/forum',6,3),
- (8,'team','/',7,0),
- (10,'login','/',8,4),
- (11,'register','/',9,4);
+ (1,'news','/',1,0);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cj_pathfinder` ENABLE KEYS */;
 
@@ -96,7 +89,7 @@ CREATE TABLE  `contjell`.`cj_settings` (
   `setting_value` varchar(225) NOT NULL,
   `setting_mod` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contjell`.`cj_settings`
@@ -104,8 +97,7 @@ CREATE TABLE  `contjell`.`cj_settings` (
 
 /*!40000 ALTER TABLE `cj_settings` DISABLE KEYS */;
 LOCK TABLES `cj_settings` WRITE;
-INSERT INTO `contjell`.`cj_settings` VALUES  (1,'core_default_primary','1',0),
- (2,'core_default_theme','themestun',0);
+INSERT INTO `contjell`.`cj_settings` VALUES  (1,'core_dfault_primary','news',0);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cj_settings` ENABLE KEYS */;
 

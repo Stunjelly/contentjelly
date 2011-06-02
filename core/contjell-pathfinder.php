@@ -5,6 +5,8 @@ class cj_pathfinder {
 	public $primary;
 	public $secondary;
 	public $hooks;
+	public $login;
+	public $logout;
 	private $path_with_hooks;
 	private $debug_mode_on;
 	
@@ -17,6 +19,8 @@ class cj_pathfinder {
 		$this->primary = $this->primary->setting_value;
 		
 		$this->secondary = null;
+		$this->login = false;
+		$this->logout = false;
 		$this->hooks = array();
 		$this->path_with_hooks = "/";
       $this->init_location =  explode("/", $init_location);
@@ -49,11 +53,16 @@ class cj_pathfinder {
 					
 					//if a hook...
 					if ($check_hook == FALSE) {
+						
 						if($path_prefix != "/") $path_prefix .= "/";
-						
-						//add hook holder to imaginary path
-						$path_prefix .= "{%hook%}";
-						
+						if ($path_chunk == "login") {
+							$this->login = TRUE;
+						} else if($path_chunk == "logout") {
+							$this->logout = TRUE;
+						} else {						
+							//add hook holder to imaginary path
+							$path_prefix .= "{%hook%}";
+						}
 						//add content of hook to hook array, later this will get passed to the selected module
      	          	$this->hooks[] = $path_chunk;
      	         
@@ -66,7 +75,11 @@ class cj_pathfinder {
 						
 						//check to see if the module exists and is loaded, (this will also be 'is enabled' later I think
 						if(ISSET($cj_modules->m_list[$check_hook]['name'])){
-							
+							if ($path_chunk == "login") {
+								$this->login = TRUE;
+							} else if($path_chunk == "logout") {
+								$this->logout = TRUE;
+							}
 							//if parent is not defined then it's a primary or tertiary module and doesn't have a parent dependency
 							//it may still have dependencies but I think it will be set up so that it won't 'enable' without 
 							//dependencies already installed. 
