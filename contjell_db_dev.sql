@@ -33,7 +33,7 @@ CREATE TABLE  `contjell`.`cj_modules` (
   `module_loc` text NOT NULL,
   `module_parent` varchar(10) NOT NULL,
   PRIMARY KEY (`module_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contjell`.`cj_modules`
@@ -41,9 +41,11 @@ CREATE TABLE  `contjell`.`cj_modules` (
 
 /*!40000 ALTER TABLE `cj_modules` DISABLE KEYS */;
 LOCK TABLES `cj_modules` WRITE;
-INSERT INTO `contjell`.`cj_modules` VALUES  (1,'test_module',1,'primary/test_module',''),
- (5,'profile',2,'','4'),
- (4,'users',1,'','');
+INSERT INTO `contjell`.`cj_modules` VALUES  (5,'profile',2,'primary/user/secondary/profile','4'),
+ (4,'users',1,'primary/user',''),
+ (8,'login',2,'primary/user/secondary/login','4'),
+ (9,'register',2,'primary/user/secondary/register','4'),
+ (10,'send_email',3,'tertiary/send_email','');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cj_modules` ENABLE KEYS */;
 
@@ -60,7 +62,7 @@ CREATE TABLE  `contjell`.`cj_pathfinder` (
   `path_module` int(11) NOT NULL,
   `path_parent` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contjell`.`cj_pathfinder`
@@ -71,9 +73,9 @@ LOCK TABLES `cj_pathfinder` WRITE;
 INSERT INTO `contjell`.`cj_pathfinder` VALUES  (6,'profile','/user/{%hook%}',5,4),
  (5,'{%hook%}','/user',4,0),
  (4,'user','/',4,0),
- (3,'forum','/',3,0),
- (2,'blog','/',2,0),
- (1,'news','/',1,0);
+ (1,'news','/',1,0),
+ (12,'login','/',8,4),
+ (11,'register','/',9,4);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cj_pathfinder` ENABLE KEYS */;
 
@@ -89,7 +91,7 @@ CREATE TABLE  `contjell`.`cj_settings` (
   `setting_value` varchar(225) NOT NULL,
   `setting_mod` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contjell`.`cj_settings`
@@ -97,9 +99,40 @@ CREATE TABLE  `contjell`.`cj_settings` (
 
 /*!40000 ALTER TABLE `cj_settings` DISABLE KEYS */;
 LOCK TABLES `cj_settings` WRITE;
-INSERT INTO `contjell`.`cj_settings` VALUES  (1,'core_dfault_primary','news',0);
+INSERT INTO `contjell`.`cj_settings` VALUES  (1,'core_default_primary','1',0),
+ (2,'core_default_theme','themestun',0);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cj_settings` ENABLE KEYS */;
+
+
+--
+-- Definition of table `contjell`.`cj_users`
+--
+
+DROP TABLE IF EXISTS `contjell`.`cj_users`;
+CREATE TABLE  `contjell`.`cj_users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(100) NOT NULL,
+  `user_password` varchar(40) NOT NULL,
+  `user_salt` varchar(10) NOT NULL,
+  `user_activation` varchar(40) NOT NULL,
+  `user_status` int(11) NOT NULL,
+  `user_email` text NOT NULL,
+  `user_lastseen` int(11) NOT NULL,
+  `user_lang` tinytext NOT NULL,
+  `user_key` varchar(40) NOT NULL,
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `contjell`.`cj_users`
+--
+
+/*!40000 ALTER TABLE `cj_users` DISABLE KEYS */;
+LOCK TABLES `cj_users` WRITE;
+INSERT INTO `contjell`.`cj_users` VALUES  (12,'ed','8b06729815f6625c76d99cf02210b063','66442','7dc9fd3566abd47e40650cdc559e723e',1,'ed@stunjelly.com',0,'','963e0a8dbe63a91473d1038ed451b903');
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `cj_users` ENABLE KEYS */;
 
 
 
