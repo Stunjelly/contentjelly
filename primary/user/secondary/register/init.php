@@ -50,18 +50,18 @@ if (ISSET($_POST['register'])){
 			$db->query("INSERT INTO ".$table_prefix."users (user_name, user_password, user_salt, user_key, user_email, user_activation, user_status) VALUES ('".$db->escape($_POST['username'])."','".$password."','".$salt."','".$key."','".$db->escape($_POST['email'])."','".$activation."','1')");
 			$new_user_id = mysql_insert_id();
 			
-			//send registration email
-			$activation_email = new send_email($_POST['email'],'bill@test.com','Content Jelly Activation','please click the link below to activate your Content Jelly Account\n\n http://localhost/contjell/activate/'.$new_user_id.'/'.$activation);
-			$activation_email->send();	
+			//send registration email - disabled due to localhost issues !!!! REMIND SELF TO PUT IT BACK IN LATER!
+			//$activation_email = new send_email($_POST['email'],'bill@test.com','Content Jelly Activation','please click the link below to activate your Content Jelly Account\n\n http://localhost/contjell/activate/'.$new_user_id.'/'.$activation);
+			//$activation_email->send();	
 			
 				
 		}
 	}	
 	if ($register_error != ""){
-		include($cj_theme->loc."primary/user/secondary/register.php");
+		//include($cj_theme->loc."primary/user/secondary/register.php");
 	}
 } else {
-	include($cj_theme->loc."primary/user/secondary/register.php");
+	//include($cj_theme->loc."primary/user/secondary/register.php");
 }
 
 

@@ -13,10 +13,9 @@ class cj_pathfinder {
 	 public function __construct() {
 	 	global $db, $table_prefix, $init_location;
 	 	//find default module for "/" page
-		$get_primary_default = $db->get_results("SELECT setting_value FROM ".$table_prefix."settings WHERE setting_name='core_default_primary' LIMIT 0,1");
+		$get_primary_default = $db->get_var("SELECT setting_value FROM ".$table_prefix."settings WHERE setting_name='core_default_primary' LIMIT 0,1");
 		
-		$this->primary = $get_primary_default[0];
-		$this->primary = $this->primary->setting_value;
+		$this->primary = $get_primary_default;
 		
 		$this->secondary = null;
 		$this->login = false;
@@ -120,17 +119,17 @@ class cj_pathfinder {
 		global $db, $table_prefix, $cj_error;
 		
 		//search the pathfinder table for anything that mataches our imaginary path prefix and our chunk.
-		$look_for_hook = $db->get_results("SELECT path_module FROM ".$table_prefix."pathfinder WHERE path_chunk='".$chunk."' and path_prefix='".$path_prefix."' LIMIT 0,1");
+		$look_for_hook = $db->get_var("SELECT path_module FROM ".$table_prefix."pathfinder WHERE path_chunk='".$chunk."' and path_prefix='".$path_prefix."' LIMIT 0,1");
 
 		//if a match is not found
-		if (!ISSET($look_for_hook[0]->path_module)) {
+		if (!ISSET($look_for_hook)) {
 			return (FALSE);
 			
 		//if a match is found...
 		} else {
 			
 			//return it's id
-			return ((INT)$look_for_hook[0]->path_module);
+			return ((INT)$look_for_hook);
 		}
 	}	
 	

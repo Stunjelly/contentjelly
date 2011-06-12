@@ -34,6 +34,7 @@ REMOTE UPDATES: ???
 
 PLAN
 ----
+I feel like I'm making some headway, watch this space.
 
 currently working through some user stuff, feel like I'm having to make big decisions when really I just want do the simple stuff :(
 

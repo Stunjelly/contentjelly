@@ -36,4 +36,14 @@ $domain_array[$i])) {
   return true;
 }
 
+function get_user_info ($id) {
+	global $db, $table_prefix;
+	$user_info = $db->get_row("SELECT * FROM ".$table_prefix."users WHERE user_id='".$id."' LIMIT 0,1", ARRAY_A);
+	if ($user_info['user_id'] > 0) {
+		return ($user_info);	
+	} else {
+		return (FALSE);	
+	}
+}
+
 ?>
