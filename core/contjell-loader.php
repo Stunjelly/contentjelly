@@ -24,12 +24,6 @@ if ( file_exists(ABSPATH . 'core/contjell-config.php') ) {
 	$cj_auth = new cj_auth();
 	$cj_theme = new cj_theme();
 	
-//make global tests
-	global $cj_error;
-	global $cj_pathfinder;
-	global $cj_modules;
-	global $cj_theme;
-	global $db;	
 	
 	//testing stuff
 	$cj_modules->get_mods();
@@ -37,6 +31,10 @@ if ( file_exists(ABSPATH . 'core/contjell-config.php') ) {
 	$cj_auth->init();
 	$cj_modules->load_mods();
 	
+	//loadtheme
+	//$cj_theme->set_theme_target();
+	
+	//include($cj_theme->theme_target);
 	//if suffix /debug on path then fireup the debug window.
 	if ($cj_pathfinder->debug_mode() and CJ_DEBUG_MODE_ON == TRUE){
 		$cj_error->debugger();

@@ -44,17 +44,28 @@ class cj_modules {
 	/* function to load module class*/
 	public function load_mods() {
 		global $cj_pathfinder, $db, $cj_modules, $table_prefix, $cj_theme, $cj_errors, $cj_auth;
-			//currently only debugging
-			//print $cj_pathfinder->primary;
-			foreach ($this->m_list as $key=>$mod_is_teri){
-				if ($mod_is_teri['type'] == 3) {
-					include_once(ABSPATH . $this->m_list[$key]['location']."/init.php");
-				}
+		//currently only debugging
+		//print $cj_pathfinder->primary;
+		
+		//set default theme things
+		$cj_theme->set_theme_target();
+		
+		//load tertiary first
+		foreach ($this->m_list as $key=>$mod_is_teri){
+			if ($mod_is_teri['type'] == 3) {
+				include_once(ABSPATH . $this->m_list[$key]['location']."/init.php");
 			}
-			include_once(ABSPATH . $this->m_list[$cj_pathfinder->primary]['location']."/init.php");
-			if ($cj_pathfinder->secondary != null) {
-				include_once(ABSPATH . $this->m_list[$cj_pathfinder->secondary]['location']."/init.php");
-			}
+		}
+		
+		//load primary
+		include_once(ABSPATH . $this->m_list[$cj_pathfinder->primary]['location']."/init.php");
+		
+		//load secondary if required.
+		if ($cj_pathfinder->secondary != null) {
+			include_once(ABSPATH . $this->m_list[$cj_pathfinder->secondary]['location']."/init.php");
+		}
+		//load theme
+		include($cj_theme->theme_target);
 	}
 }
 

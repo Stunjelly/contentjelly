@@ -2,7 +2,7 @@
 //going to base this stuff off how wordpress does it kinda.
 //grab intended location, set for global useage
 error_reporting(-1);
-$init_location = $_GET['i_l'];
+if (ISSET($_GET['i_l'])){$init_location = $_GET['i_l'];} else { $init_location = ""; }
 
 
 // set ABSPATH to this parent level directory
