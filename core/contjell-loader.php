@@ -15,6 +15,7 @@ if ( file_exists(ABSPATH . 'core/contjell-config.php') ) {
 	require_once(ABSPATH . 'core/contjell-pathfinder.php');
 	require_once(ABSPATH . 'core/contjell-auth.php');
 	require_once(ABSPATH . 'core/contjell-theme.php');
+	require_once(ABSPATH . 'core/contjell-functions.php');
 	
 	//start core classes
 	$cj_error = new cj_error();

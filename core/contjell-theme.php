@@ -17,22 +17,26 @@ class cj_theme {
       define("THEMEPATH", RELPATH."themes/".$get_default_theme."/");
     }
 	
-	public function set_theme_target ($file = null) {
+	public function set_theme_target ($file = null, $error = FALSE) {
 		global $cj_pathfinder, $cj_modules;
-		$this->theme_target = $this->loc.$cj_modules->m_list[$cj_pathfinder->primary]['name'];
-		if ($cj_pathfinder->secondary != null){
-			$this->theme_target .= "/secondary";
-			if ($file != null) {
-				$this->theme_target .= "/".$file.".php";
+		if (!$error) {
+			$this->theme_target = $this->loc.$cj_modules->m_list[$cj_pathfinder->primary]['name'];
+			if ($cj_pathfinder->secondary != null){
+				$this->theme_target .= "/secondary";
+				if ($file != null) {
+					$this->theme_target .= "/".$file.".php";
+				}else {
+					$this->theme_target .= "/".$cj_modules->m_list[$cj_pathfinder->secondary]['name'].".php";
+				}
 			}else {
-				$this->theme_target .= "/".$cj_modules->m_list[$cj_pathfinder->secondary]['name'].".php";
+				if ($file != null) {
+					$this->theme_target .= "/".$file.".php";
+				} else {
+					$this->theme_target .= "/index.php";
+				}
 			}
-		}else {
-			if ($file != null) {
-				$this->theme_target .= "/".$file.".php";
-			} else {
-				$this->theme_target .= "/index.php";
-			}
+		} else {
+			$this->theme_target = $this->loc."error_pages/".$file.".php";
 		}
 	}
     

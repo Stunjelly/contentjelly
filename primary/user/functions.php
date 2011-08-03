@@ -36,10 +36,16 @@ $domain_array[$i])) {
   return true;
 }
 
+
 function get_user_info ($id) {
 	global $db, $table_prefix;
-	$user_info = $db->get_row("SELECT * FROM ".$table_prefix."users WHERE user_id='".$id."' LIMIT 0,1", ARRAY_A);
+	$user_info = $db->get_row("SELECT user_name, user_id, user_email, user_lastseen FROM ".$table_prefix."users WHERE user_id='".$id."' LIMIT 0,1", ARRAY_A);
+	
 	if ($user_info['user_id'] > 0) {
+		$user_details_get = $db->get_results("SELECT detail_name, detail_value FROM ".$table_prefix."user_details WHERE user_id = '".$user_info['user_id']."'", ARRAY_A);
+		foreach ($user_details_get as $detail) {
+			$user_info[$detail['detail_name']] = $detail['detail_value'];
+		}
 		return ($user_info);	
 	} else {
 		return (FALSE);	
